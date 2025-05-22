@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Web</title>
+    <style>
+        body {
+            background: #f7f7f7;
+            font-family: Arial, Helvetica, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        .calculadora {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+            width: 320px;
+        }
+        .display {
+            width: 100%;
+            height: 40px;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            text-align: right;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            padding: 0.5rem;
+            background: #f0f0f0;
+        }
+        .botoes {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.5rem;
+        }
+        button {
+            height: 50px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 5px;
+            background: #e0e0e0;
+            transition: background 0.2s;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #bdbdbd;
+        }
+        .igual {
+            background: #4caf50;
+            color: #fff;
+        }
+        .igual:hover {
+            background: #388e3c;
+        }
+        .operador {
+            background: #2196f3;
+            color: #fff;
+        }
+        .operador:hover {
+            background: #1565c0;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculadora">
+        <input type="text" class="display" id="display" disabled>
+        <div class="botoes">
+            <button onclick="adicionar('7')">7</button>
+            <button onclick="adicionar('8')">8</button>
+            <button onclick="adicionar('9')">9</button>
+            <button class="operador" onclick="adicionar('/')">÷</button>
+            <button onclick="adicionar('4')">4</button>
+            <button onclick="adicionar('5')">5</button>
+            <button onclick="adicionar('6')">6</button>
+            <button class="operador" onclick="adicionar('*')">×</button>
+            <button onclick="adicionar('1')">1</button>
+            <button onclick="adicionar('2')">2</button>
+            <button onclick="adicionar('3')">3</button>
+            <button class="operador" onclick="adicionar('-')">-</button>
+            <button onclick="adicionar('0')">0</button>
+            <button onclick="adicionar('.')">.</button>
+            <button onclick="limpar()">C</button>
+            <button class="operador" onclick="adicionar('+')">+</button>
+            <button onclick="adicionar('**')">^</button>
+            <button onclick="raizQuadrada()">√</button>
+            <button class="igual" onclick="calcular()">=</button>
+        </div>
+    </div>
+    <script>
+        const display = document.getElementById('display');
+        let expressao = '';
+        function adicionar(valor) {
+            expressao += valor;
+            display.value = expressao;
+        }
+        function limpar() {
+            expressao = '';
+            display.value = '';
+        }
+        function calcular() {
+            try {
+                let resultado = eval(expressao);
+                display.value = resultado;
+                expressao = resultado.toString();
+            } catch {
+                display.value = 'Erro';
+                expressao = '';
+            }
+        }
+        function raizQuadrada() {
+            try {
+                let valor = eval(expressao);
+                let resultado = Math.sqrt(valor);
+                display.value = resultado;
+                expressao = resultado.toString();
+            } catch {
+                display.value = 'Erro';
+                expressao = '';
+            }
+        }
+    </script>
+</body>
+</html>
